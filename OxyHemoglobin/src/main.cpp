@@ -1,18 +1,19 @@
 #include <sam.h>
 #include <FreeRTOS_SAMD21.h>
 
+
 // Task function that flips raw hardware pin bits using the SAMD21 Port Controller
 void vBlinkTask(void *pvParameters) {
-    // 1. Configure Pin PA27 (Built-in LED) as a digital OUTPUT
-    // PORT->Group[0] refers to PORT A. (Group[1] would be PORT B)
-    PORT->Group[0].DIRSET.reg = PORT_PA27;
+    // 1. Configure Pin PB08 (Built-in LED) as a digital OUTPUT
+    // PORT->Group[1] refers to PORT B. (Group[0] would be PORT A)
+    PORT->Group[1].DIRSET.reg = PORT_PB08;
 
     while (1) {
         // 2. Toggle the pin state by writing a 1 to the OUTTGL register
-        PORT->Group[0].OUTTGL.reg = PORT_PA27;
+        PORT->Group[1].OUTTGL.reg = PORT_PB08;
         
         // 3. Keep the task asleep for 500ms non-blocking
-        vTaskDelay(pdMS_TO_TICKS(500)); 
+        vTaskDelay(pdMS_TO_TICKS(500)); // 500ms delay
     }
 }
 
@@ -48,3 +49,4 @@ extern "C" {
     // Left completely blank
   }
 }
+
