@@ -1,2 +1,0 @@
-# ECNG-3006
-ECNG 3006 Labs 
